@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
+
 const ArticleCard = ({ article }) => {
   const {
     author,
     title,
     topic,
+    article_id,
     created_at,
     votes,
     article_img_url,
     comment_count,
   } = article;
+  const path = `articles/${article_id}`;
 
   return (
     <div>
@@ -18,6 +22,9 @@ const ArticleCard = ({ article }) => {
       </p>
       <p>Votes: {votes}</p>
       <p>Comments: {comment_count}</p>
+      <button>
+        <Link to={path}>View article</Link>
+      </button>
     </div>
   );
 };
