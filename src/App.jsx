@@ -4,6 +4,7 @@ import Homepage from "./Components/Homepage";
 import Header from "./Components/Header";
 import Navbar from "./Components/Navbar";
 import ArticlePage from "./Components/ArticlePage";
+import CommentsPage from "./Components/CommentsPage";
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/articles/:article_id" element={<ArticlePage />} />
+        <Route
+          path="/articles/:article_id/comments"
+          element={<CommentsPage />}
+        />
       </Routes>
     </>
   );
