@@ -23,6 +23,8 @@ const ArticlePage = () => {
     }, []);
   };
 
+  const path = `/articles/${article_id}/comments`;
+
   return (
     <div>
       <ArticleDetails
@@ -33,7 +35,7 @@ const ArticlePage = () => {
       <button onClick={handleVotes(1)}>Upvote</button>
       <button onClick={handleVotes(-1)}>Downvote</button> <br />
       <button>
-        <Link>View comments</Link>
+        <Link to={path}>View comments</Link>
       </button>
     </div>
   );
