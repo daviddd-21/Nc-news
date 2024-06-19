@@ -1,4 +1,4 @@
-const ArticleDetails = ({ article, votesState, setVotesState }) => {
+const ArticleDetails = ({ article, votes }) => {
   const {
     article_img_url,
     author,
@@ -7,9 +7,7 @@ const ArticleDetails = ({ article, votesState, setVotesState }) => {
     created_at,
     title,
     topic,
-    votes,
   } = article;
-  setVotesState(votes);
 
   let date;
 
@@ -25,7 +23,7 @@ const ArticleDetails = ({ article, votesState, setVotesState }) => {
         By: {author}, Topic: {topic}
       </p>
       <p>{body}</p>
-      <p>Votes: {votesState}</p>
+      <p>Votes: {votes}</p>
       <p>Comments: {comment_count}</p>
       <p>{date ? date.toUTCString() : null}</p>
     </div>

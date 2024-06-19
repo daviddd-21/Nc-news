@@ -7,37 +7,48 @@ import { Link } from "react-router-dom";
 const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [votesState, setVotesState] = useState(0);
+  const [votes, setVotes] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchArticleById(article_id).then(({ data }) => {
       setArticle(data.article);
+      setVotes(data.article.votes);
+      setIsLoading(false);
     });
-  }, [votesState]);
+  }, [votes]);
 
-  const handleVotes = (vote) => {
-    useEffect(() => {
-      patchArticleByID(article_id, vote).then(({ data }) => {
-        setVotesState(data.updatedArticle.votes);
-      });
-    }, []);
+  const handleVotes = (event) => {
+    let vote;
+    if (event.target.id === "Upvote") {
+      vote = 1;
+    } else {
+      vote = -1;
+    }
+    patchArticleByID(article_id, vote).then(({ data }) => {
+      setVotes(data.updatedArticle.votes);
+    });
   };
 
   const path = `/articles/${article_id}/comments`;
 
-  return (
+  return !isLoading ? (
     <div>
-      <ArticleDetails
-        article={article}
-        votesState={votesState}
-        setVotesState={setVotesState}
-      />
-      <button onClick={handleVotes(1)}>Upvote</button>
-      <button onClick={handleVotes(-1)}>Downvote</button> <br />
+      <ArticleDetails article={article} votes={votes} />
+      <button id="Upvote" onClick={handleVotes}>
+        Upvote
+      </button>
+      <button id="Downvote" onClick={handleVotes}>
+        Downvote
+      </button>{" "}
+      <br />
       <button>
         <Link to={path}>View comments</Link>
       </button>
     </div>
+  ) : (
+    <p>Loading ...</p>
   );
 };
 
