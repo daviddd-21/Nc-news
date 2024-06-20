@@ -5,18 +5,42 @@ import Comment from "./CommentsPage-components/Comment";
 
 const CommentsPage = () => {
   const { article_id } = useParams();
+  const username = "tickle122";
   const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [commentsLoading, setCommentsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    setCommentsLoading(true);
     fetchCommentsByArticleId(article_id).then(({ data }) => {
       setComments(data.comments);
-      setIsLoading(false);
+      setCommentsLoading(false);
     });
-  }, [article_id]);
+  }, [article_id, isLoading, deleted]);
+
+  const handleClick = () => {
+    setDeleted(false);
+  };
 
   const path = `/articles/${article_id}/comments/post-a-comment`;
+
+  if (isLoading) {
+    // refine later
+    return <p>One moment...</p>;
+  }
+
+  if (deleted) {
+    const path = `/articles/${article_id}/comments`;
+    return (
+      <p>
+        Comment has been deleted.{" "}
+        <Link onClick={handleClick} to={path}>
+          Return to comments
+        </Link>
+      </p>
+    );
+  }
 
   return (
     <div>
@@ -25,7 +49,15 @@ const CommentsPage = () => {
       </button>
       <ol>
         {comments.map((comment) => {
-          return <Comment key={comment.comment_id} comment={comment} />;
+          return (
+            <Comment
+              key={comment.comment_id}
+              comment={comment}
+              username={username}
+              setDeleted={setDeleted}
+              setIsLoading={setIsLoading}
+            />
+          );
         })}
       </ol>
       <button>
