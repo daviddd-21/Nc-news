@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchCommentsByArticleId } from "../utils/functions";
 import Comment from "./CommentsPage-components/Comment";
@@ -16,13 +16,21 @@ const CommentsPage = () => {
     });
   }, [article_id]);
 
+  const path = `/articles/${article_id}/comments/post-a-comment`;
+
   return (
     <div>
+      <button>
+        <Link to={path}>Add a comment</Link>
+      </button>
       <ol>
         {comments.map((comment) => {
           return <Comment key={comment.comment_id} comment={comment} />;
         })}
       </ol>
+      <button>
+        <Link to={path}>Add a comment</Link>
+      </button>
     </div>
   );
 };

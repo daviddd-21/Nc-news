@@ -31,7 +31,8 @@ const ArticlePage = () => {
     });
   };
 
-  const path = `/articles/${article_id}/comments`;
+  const pathToComments = `/articles/${article_id}/comments`;
+  const pathToPostComment = `/articles/${article_id}/comments/post-a-comment`;
 
   return !isLoading ? (
     <div>
@@ -44,7 +45,10 @@ const ArticlePage = () => {
       </button>{" "}
       <br />
       <button>
-        <Link to={path}>View comments</Link>
+        <Link to={pathToComments}>View comments</Link>
+      </button>
+      <button>
+        <Link to={pathToPostComment}>Add a comment</Link>
       </button>
     </div>
   ) : (

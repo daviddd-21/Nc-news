@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Navbar from "./Components/Navbar";
 import ArticlePage from "./Components/ArticlePage";
 import CommentsPage from "./Components/CommentsPage";
+import PostCommentPage from "./Components/PostCommentPage";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Route
           path="/articles/:article_id/comments"
           element={<CommentsPage />}
+        />
+        <Route
+          path="/articles/:article_id/comments/post-a-comment"
+          element={<PostCommentPage />}
         />
       </Routes>
     </>

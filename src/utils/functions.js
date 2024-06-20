@@ -20,3 +20,10 @@ export function patchArticleByID(article_id, vote) {
 export function fetchCommentsByArticleId(article_id) {
   return origin.get(`/api/articles/${article_id}/comments`);
 }
+
+export function postComment(article_id, username, comment) {
+  return origin.post(`/api/articles/${article_id}/comments`, {
+    username: username,
+    body: comment,
+  });
+}
