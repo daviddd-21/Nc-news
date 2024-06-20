@@ -8,7 +8,7 @@ const PostCommentPage = () => {
     // refine later
     return <h2>Page not found</h2>;
   }
-  const username = "tickle122";
+  const username = "tickle122"; // use react context later
   const [comment, setComment] = useState("");
   const [posted, setPosted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

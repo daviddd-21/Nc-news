@@ -27,3 +27,7 @@ export function postComment(article_id, username, comment) {
     body: comment,
   });
 }
+
+export function deleteComment(comment_id) {
+  return origin.delete(`/api/comments/${comment_id}`);
+}
