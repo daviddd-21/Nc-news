@@ -1,11 +1,12 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Homepage from "./Components/Homepage";
+import Articles from "./Components/Articles";
 import Header from "./Components/Header";
 import Navbar from "./Components/Navbar";
 import ArticlePage from "./Components/ArticlePage";
 import CommentsPage from "./Components/CommentsPage";
 import PostCommentPage from "./Components/PostCommentPage";
+import Homepage from "./Components/Homepage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:article_id" element={<ArticlePage />} />
         <Route
           path="/articles/:article_id/comments"

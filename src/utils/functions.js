@@ -1,11 +1,13 @@
 import axios from "axios";
 const origin = axios.create({ baseURL: "https://news-api-y9rq.onrender.com" });
 
-export function fetchArticles(query, option) {
+export function fetchArticles(topicQuery) {
   const queries = {
     params: {},
   };
-  queries.params[query] = option;
+  if (topicQuery) {
+    queries.params.topic = topicQuery;
+  }
   return origin.get("/api/articles", queries);
 }
 
@@ -30,4 +32,8 @@ export function postComment(article_id, username, comment) {
 
 export function deleteComment(comment_id) {
   return origin.delete(`/api/comments/${comment_id}`);
+}
+
+export function fetchTopics() {
+  return origin.get("/api/topics");
 }

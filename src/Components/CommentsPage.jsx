@@ -17,7 +17,7 @@ const CommentsPage = () => {
       setComments(data.comments);
       setCommentsLoading(false);
     });
-  }, [article_id, isLoading, deleted]);
+  }, [article_id, deleted]);
 
   const handleClick = () => {
     setDeleted(false);
