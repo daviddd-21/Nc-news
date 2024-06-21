@@ -1,9 +1,12 @@
 import axios from "axios";
 const origin = axios.create({ baseURL: "https://news-api-y9rq.onrender.com" });
 
-export function fetchArticles(topicQuery) {
+export function fetchArticles(topicQuery, sortByQuery, orderQuery) {
   const queries = {
-    params: {},
+    params: {
+      sort_by: sortByQuery,
+      order: orderQuery,
+    },
   };
   if (topicQuery) {
     queries.params.topic = topicQuery;
