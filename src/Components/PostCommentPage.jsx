@@ -19,8 +19,6 @@ const PostCommentPage = () => {
     }
   };
 
-  useEffect(() => {}, [isLoading]);
-
   const handleSubmit = (event) => {
     setIsLoading(true);
 
