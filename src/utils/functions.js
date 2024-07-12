@@ -8,7 +8,7 @@ export function fetchArticles(topicQuery, sortByQuery, orderQuery) {
       order: orderQuery,
     },
   };
-  if (topicQuery) {
+  if (topicQuery !== "All") {
     queries.params.topic = topicQuery;
   }
   return origin.get("/api/articles", queries);
@@ -39,4 +39,16 @@ export function deleteComment(comment_id) {
 
 export function fetchTopics() {
   return origin.get("/api/topics");
+}
+
+export function fetchUsers() {
+  return origin.get("/api/users");
+}
+
+export function fetchUserByUsername(username) {
+  return origin.get(`/api/users/${username}`);
+}
+
+export function postUser(name, username, password, avatar_url) {
+  return origin.post("/api/users", { name, username, password, avatar_url });
 }

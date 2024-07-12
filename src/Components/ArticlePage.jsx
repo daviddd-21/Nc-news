@@ -2,21 +2,26 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchArticleById, patchArticleByID } from "../utils/functions";
 import ArticleDetails from "./ArticlePage-components/ArticleDetails";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [votes, setVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
-    fetchArticleById(article_id).then(({ data }) => {
-      setArticle(data.article);
-      setVotes(data.article.votes);
-      setIsLoading(false);
-    });
+    fetchArticleById(article_id)
+      .then(({ data }) => {
+        setArticle(data.article);
+        setVotes(data.article.votes);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        navigate("/error/404");
+      });
   }, [votes]);
 
   const handleVotes = (event) => {
