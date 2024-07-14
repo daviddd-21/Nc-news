@@ -40,3 +40,99 @@
 .read-the-docs {
   color: #888;
 }
+
+.avatar {
+  border: 3px solid black;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.avatarsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar:hover {
+  border: 4px solid blue;
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+.usernameTextbox {
+  margin-bottom: 20px;
+}
+
+.navbar {
+  width: 100vw;
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+}
+
+.welcome-message {
+  padding-top: 50px;
+}
+
+.article-card {
+  width: 400px;
+  height: 450px;
+}
+
+.article-card:hover {
+  cursor: pointer;
+}
+
+.article-img {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-text {
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+}
+
+.votes-text,
+.comments-text,
+.topic-text {
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.topic-text {
+  background-color: rgb(43, 43, 206);
+  color: white;
+  font-weight: bold;
+}
+
+.article-details-img {
+  width: 400px;
+  height: 400px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.article-details-text-container {
+  margin-left: 20px;
+  width: 550px;
+}

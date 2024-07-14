@@ -4,6 +4,7 @@ import UserCard from "./Hompage-components/UserCard";
 import LoginForm from "./Hompage-components/LoginForm";
 import { UserContext } from "../Context/UserContext";
 import { useContext } from "react";
+import { Stack } from "@mui/material";
 
 const Homepage = () => {
   const [users, setUsers] = useState([]);
@@ -28,22 +29,38 @@ const Homepage = () => {
 
   return (
     <>
-      <p>Get started by logging in</p>
-      <LoginForm setUser={setUser} />
-      <div>
-        <p>
-          Or alternatively you can login as a guest with one of the guest users
-        </p>
-        {users.map((user) => {
-          return (
-            <UserCard
-              key={user.username}
-              userDetails={user}
-              setUser={setUser}
-            />
-          );
-        })}
-      </div>
+      <Stack
+        spacing={2}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        width="100%"
+      >
+        <h1 className="welcome-message">Welcome to Nc News</h1>
+        <h2>Get started by logging in</h2>
+        <LoginForm setUser={setUser} />
+      </Stack>
+
+      <Stack
+        spacing={4}
+        justifyContent="center"
+        direction="column"
+        alignItems="center"
+        display="flex"
+      >
+        <h2>Guest users</h2>
+        <Stack spacing={4} direction="row" className="avatarsContainer">
+          {users.map((user) => {
+            return (
+              <UserCard
+                key={user.username}
+                userDetails={user}
+                setUser={setUser}
+              />
+            );
+          })}
+        </Stack>
+      </Stack>
     </>
   );
 };

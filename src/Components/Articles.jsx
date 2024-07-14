@@ -1,9 +1,9 @@
 import { fetchArticles, fetchTopics } from "../utils/functions";
 import { useState, useEffect } from "react";
-import Query from "./Articles-components/Query";
 import ArticleCard from "./Articles-components/ArticleCard";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { TextField, MenuItem, Box, Stack } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
@@ -82,12 +82,19 @@ const Articles = () => {
   };
 
   if (isLoading) {
-    return <p>Loading ...</p>;
+    return <CircularProgress />;
   }
 
   return (
     <>
-      <Stack direction="row" my={3} spacing={4}>
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        direction="row"
+        my={3}
+        spacing={4}
+        marginTop="60px"
+      >
         <Box width="200px">
           <TextField
             onChange={handleTopicChange}
@@ -137,9 +144,19 @@ const Articles = () => {
           </TextField>
         </Box>
       </Stack>
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
-      })}
+      <Stack
+        spacing={2}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        direction="row"
+        flexWrap="wrap"
+        className="articles-container"
+      >
+        {articles.map((article) => {
+          return <ArticleCard key={article.article_id} article={article} />;
+        })}
+      </Stack>
     </>
   );
 };

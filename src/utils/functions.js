@@ -52,3 +52,25 @@ export function fetchUserByUsername(username) {
 export function postUser(name, username, password, avatar_url) {
   return origin.post("/api/users", { name, username, password, avatar_url });
 }
+
+export function patchCommentByID(comment_id, vote) {
+  return origin.patch(`/api/comments/${comment_id}`, { inc_votes: vote });
+}
+
+const avatarUrl = "../../public/no-image-provided.png";
+
+export function postArticle(
+  title,
+  topic,
+  author,
+  body,
+  avatar_url = avatarUrl
+) {
+  return origin.post("/api/articles", {
+    title,
+    topic,
+    author,
+    body,
+    avatar_url,
+  });
+}

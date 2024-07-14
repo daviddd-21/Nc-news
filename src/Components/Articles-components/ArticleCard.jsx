@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  Box,
+  Stack,
   Card,
   CardContent,
-  CardActions,
-  Button,
   CardMedia,
   Typography,
   Grid,
@@ -24,44 +22,54 @@ const ArticleCard = ({ article }) => {
   const path = `/articles/${article_id}`;
 
   const date = new Date(created_at);
-  const dateFormatted = date.toUTCString();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() returns 0-11
+  const day = String(date.getDate()).padStart(2, "0");
+  const dateFormatted = `${year}-${month}-${day}`;
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(path);
+  };
 
   return (
-    <Box my={4}>
+    <Stack onClick={handleClick} className="article-card">
       <Card>
         <CardContent>
+          <Typography id="article-text" variant="h6">
+            {title}
+          </Typography>
           <Grid container>
             <Grid item xs>
-              <Typography variant="h6">
-                {title} {"("}
-                {topic[0].toUpperCase() + topic.slice(1)}
-                {")"}
+              <Typography align="left" variant="subtitle2">
+                By: @{author}
               </Typography>
             </Grid>
             <Grid item xs={3}>
-              <Typography align="right" variant="subtitle1">
+              <Typography align="right" variant="subtitle1" id="article-text">
                 {dateFormatted}
               </Typography>
             </Grid>
           </Grid>
-          <Typography align="left" variant="subtitle2">
-            By: @{author}
+        </CardContent>
+        <CardMedia
+          component="img"
+          height="auto"
+          image={article_img_url}
+          className="article-img"
+        />
+        <CardContent>
+          <Typography variant="subtitle1">
+            <span className="votes-text">Votes: {votes}</span>{" "}
+            <span className="comments-text">Comments: {comment_count}</span>{" "}
+            <span className="topic-text">
+              {topic[0].toUpperCase() + topic.slice(1)}
+            </span>
           </Typography>
         </CardContent>
-        <CardMedia component="img" height="auto" image={article_img_url} />
-        <CardContent>
-          <Typography variant="subtitle1">Votes: {votes}</Typography>
-          <Typography variant="subtitle1">Comments: {comment_count}</Typography>
-        </CardContent>
-        <CardActions>
-          <Button>
-            <Link to={path} color="white">
-              View article
-            </Link>
-          </Button>
-        </CardActions>
       </Card>
-    </Box>
+    </Stack>
   );
 };
 

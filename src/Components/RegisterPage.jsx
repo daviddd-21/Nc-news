@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { postUser } from "../utils/functions";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { TextField, Stack, Button } from "@mui/material";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -31,48 +32,56 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
+    <Stack spacing={2} direction="column" marginTop={5}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
-        <input
-          name="name"
+        <TextField
+          size="small"
+          label="Name"
           value={name}
           onChange={handleChange}
+          helperText="What should we call you?"
           id="name"
           required
         />
         <br />
-        <label htmlFor="username">Username: </label>
-        <input
-          name="username"
+
+        <TextField
+          label="Username"
+          size="small"
           value={username}
           onChange={handleChange}
+          helperText="Please enter your username"
           id="username"
           required
         />
         <br />
-        <label htmlFor="password">Password: </label>
-        <input
-          name="password"
+
+        <TextField
+          label="Password"
+          size="small"
           value={password}
           onChange={handleChange}
+          helperText="Please enter your password"
           id="password"
           type="password"
           required
         />
         <br />
-        <label htmlFor="avatarURL">Avatar URL: </label>
-        <input
-          name="avatarURL"
+        <TextField
+          label="AvatarURL"
+          size="small"
           value={avatarURL}
+          helperText="Please enter your avatar URL"
           onChange={handleChange}
           id="avatarURL"
           type="url"
         />
         <br />
-        <button>Register</button>
+        <Button variant="contained" type="submit">
+          Register
+        </Button>
       </form>
-    </div>
+    </Stack>
   );
 };
 

@@ -6,57 +6,103 @@ import {
   Stack,
   Menu,
   MenuItem,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UserContext } from "../Context/UserContext";
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchUserByUsername } from "../utils/functions";
 
 const Navbar = () => {
-  const { user } = useContext(UserContext);
-  const [nameOfUser, setNameOfUser] = useState("Guest");
+  const { user, setUser } = useContext(UserContext);
+  const [nameOfUser, setNameOfUser] = useState("guest");
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
-  const open = () => {
-    return anchorEl ? true : false;
-  };
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     if (user !== "guest") {
-      fetchUserByUsername(user).then(({ data }) => {});
+      fetchUserByUsername(user).then(({ data }) => {
+        setNameOfUser(data.user.username);
+      });
     }
   });
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
+      {" "}
       <Toolbar>
-        <IconButton size="large" edge="start" color="inherit">
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nc News
-          </Typography>
-        </IconButton>
-        <IconButton
-          size="large"
-          id="menu-button"
-          onClick={handleClick}
-          aria-controls={open ? "navbar-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? true : undefined}
-        >
-          <MenuIcon id="menu-icon"></MenuIcon>
-        </IconButton>
-        <Menu id="navbar-menu" anchorEl={anchorEl} open={open} MenuListProps={{
-          "aria-labelledby": 
-        }}>
-          <MenuItem>Hello, {nameOfUser}</MenuItem>
-          <MenuItem>Manage my articles</MenuItem>
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Manage my account</MenuItem>
-        </Menu>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Nc News
+        </Typography>
+
+        {/* <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Stack direction="row" spacing={2}>
+            <Typography>Hello, {nameOfUser}</Typography>
+            <Typography>Manage my articles</Typography>
+            <Typography>Settings</Typography>
+            <Typography>Manage my account</Typography>
+          </Stack>
+        </Box> */}
+
+        <Box>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            aria-controls="navbar-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="navbar-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            MenuListProps={{ "aria-labelledby": "menu-button" }}
+          >
+            <MenuItem onClick={handleMenuClose}>Hello, {nameOfUser}!</MenuItem>
+            <MenuItem
+              onClick={() => {
+                user === "guest" ? navigate("/") : alert("Please log in first");
+                handleMenuClose;
+              }}
+            >
+              View all articles
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/post-an-article");
+                handleMenuClose;
+              }}
+            >
+              Post an article
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleMenuClose();
+                setUser("guest");
+                navigate("/");
+              }}
+            >
+              Logout
+            </MenuItem>
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
   );
