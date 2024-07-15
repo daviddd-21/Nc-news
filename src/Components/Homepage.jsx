@@ -4,11 +4,12 @@ import UserCard from "./Hompage-components/UserCard";
 import LoginForm from "./Hompage-components/LoginForm";
 import { UserContext } from "../Context/UserContext";
 import { useContext } from "react";
-import { Stack } from "@mui/material";
+import { Stack, CircularProgress } from "@mui/material";
 
 const Homepage = () => {
   const [users, setUsers] = useState([]);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchUsers().then(({ data }) => {
@@ -24,8 +25,22 @@ const Homepage = () => {
           );
         });
       });
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return (
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+        width="100%"
+      >
+        <CircularProgress />
+      </Stack>
+    );
+  }
 
   return (
     <>

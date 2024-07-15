@@ -34,10 +34,8 @@ const ArticlePage = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (user === "guest") navigate("/");
-
   useEffect(() => {
-    setIsLoading(true);
+    if (user === "guest") navigate("/");
     fetchArticleById(article_id)
       .then(({ data }) => {
         setArticle(data.article);
@@ -46,11 +44,16 @@ const ArticlePage = () => {
       .catch((err) => {
         console.log(err);
       });
+    fetchCommentsByArticleId(article_id)
+      .then(({ data }) => {
+        setComments(data.comments);
+        setIsLoading(false);
+      })
 
-    fetchCommentsByArticleId(article_id).then(({ data }) => {
-      setComments(data.comments);
-      setIsLoading(false);
-    });
+      .catch((err) => {
+        setComments([]);
+        setIsLoading(false);
+      });
   }, []);
 
   const handleUpVotes = () => {

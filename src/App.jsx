@@ -6,17 +6,8 @@ import ArticlePage from "./Components/ArticlePage";
 import Homepage from "./Components/Homepage";
 import RegisterPage from "./Components/RegisterPage";
 import PostAnArticle from "./Components/PostAnArticle";
-import { UserContext } from "./Context/UserContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 function App() {
-  const { user } = useContext(UserContext);
-
-  const navigate = useNavigate();
-  if (user === "guest") {
-    navigate("/");
-  }
   return (
     <>
       {/* <Header /> */}
