@@ -78,7 +78,9 @@ const Navbar = () => {
             <MenuItem onClick={handleMenuClose}>Hello, {nameOfUser}!</MenuItem>
             <MenuItem
               onClick={() => {
-                user === "guest" ? navigate("/") : alert("Please log in first");
+                user === "guest"
+                  ? window.alert("Please log in first")
+                  : navigate("/articles");
                 handleMenuClose;
               }}
             >
@@ -86,7 +88,9 @@ const Navbar = () => {
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/post-an-article");
+                user === "guest"
+                  ? window.alert("Please log in first")
+                  : navigate("/post-an-article");
                 handleMenuClose;
               }}
             >
