@@ -48,7 +48,7 @@ const ArticleDetails = ({ article, votes }) => {
             </Grid>
             <Grid item xs alignItems="right">
               <Typography variant="h6">
-                {date ? date.toUTCString() : null}
+                {date ? date.toUTCString().slice(5, 22) : null}
               </Typography>
             </Grid>
           </Grid>

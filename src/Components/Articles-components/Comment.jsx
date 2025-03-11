@@ -57,7 +57,7 @@ const Comment = ({ comment, user, setComments }) => {
         </Grid>
         <Grid item xs>
           <Typography variant="h5">
-            {date ? date.toUTCString() : null}
+            {date ? date.toUTCString().slice(5, 22) : null}
           </Typography>
         </Grid>
       </Grid>

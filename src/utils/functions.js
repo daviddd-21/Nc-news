@@ -46,7 +46,9 @@ export function fetchUsers() {
 }
 
 export function fetchUserByUsername(username) {
-  return origin.get(`/api/users/${username}`);
+  return origin.get(`/api/users/${username}`).catch((err) => {
+    return err;
+  });
 }
 
 export function postUser(name, username, password, avatar_url) {

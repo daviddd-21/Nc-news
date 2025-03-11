@@ -31,14 +31,17 @@ const Homepage = () => {
 
   if (isLoading) {
     return (
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-        width="100%"
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          width: "100%",
+        }}
       >
         <CircularProgress />
-      </Stack>
+      </div>
     );
   }
 

@@ -39,22 +39,24 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  const handleDeline = (msg) => {
+    handleMenuClose();
+    window.alert(msg);
+    navigate("/");
+  };
+
+  const handleSuccess = (path) => {
+    handleMenuClose();
+    navigate(path);
+  };
+
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className="navbar">
       {" "}
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Nc News
         </Typography>
-
-        {/* <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Stack direction="row" spacing={2}>
-            <Typography>Hello, {nameOfUser}</Typography>
-            <Typography>Manage my articles</Typography>
-            <Typography>Settings</Typography>
-            <Typography>Manage my account</Typography>
-          </Stack>
-        </Box> */}
 
         <Box>
           <IconButton
@@ -79,9 +81,8 @@ const Navbar = () => {
             <MenuItem
               onClick={() => {
                 user === "guest"
-                  ? window.alert("Please log in first")
-                  : navigate("/articles");
-                handleMenuClose;
+                  ? handleDeline("Please log in first")
+                  : handleSuccess("/articles");
               }}
             >
               View all articles
@@ -89,9 +90,8 @@ const Navbar = () => {
             <MenuItem
               onClick={() => {
                 user === "guest"
-                  ? window.alert("Please log in first")
-                  : navigate("/post-an-article");
-                handleMenuClose;
+                  ? handleDeline("Please log in first")
+                  : handleSuccess("/post-an-article");
               }}
             >
               Post an article

@@ -89,7 +89,7 @@ const ArticlePage = () => {
   };
 
   return !isLoading ? (
-    <div>
+    <div style={{ marginTop: "80px" }}>
       <ArticleDetails article={article} votes={votes} />
       <p>
         <IconButton onClick={handleUpVotes}>
@@ -147,9 +147,17 @@ const ArticlePage = () => {
       </ol>
     </div>
   ) : (
-    <Stack alignItems="center" justifyContent="center">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
       <CircularProgress />
-    </Stack>
+    </div>
   );
 };
 

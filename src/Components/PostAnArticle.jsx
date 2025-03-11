@@ -32,8 +32,9 @@ const PostAnArticle = () => {
   };
 
   const handleSubmit = (event) => {
-    setIsLoading(true);
     event.preventDefault();
+    if (!title || !body || !topic) return;
+    setIsLoading(true);
     postArticle(title, topic, user, body, avatarURL).then(() => {
       navigate("/articles");
     });
@@ -41,19 +42,28 @@ const PostAnArticle = () => {
 
   if (isLoading) {
     return (
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-        width="100%"
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          width: "100vw",
+        }}
       >
         <CircularProgress />
-      </Stack>
+      </div>
     );
   }
 
   return (
-    <Stack spacing={2} direction="column" marginTop={7}>
+    <Stack
+      spacing={2}
+      direction="column"
+      justifyContent="start"
+      alignItems="center"
+      marginTop={5}
+    >
       <Typography variant="h5">
         Please fill in the required details to post an article
       </Typography>
@@ -70,7 +80,7 @@ const PostAnArticle = () => {
         />
       </Stack>
 
-      <Stack width={400}>
+      <Stack sm={{ width: 400 }} width={300}>
         <TextField
           label="Body"
           size="small"
@@ -96,13 +106,16 @@ const PostAnArticle = () => {
           value={topic}
           required
         >
+          <MenuItem value="" disabled selected>
+            Please Choose
+          </MenuItem>
           <MenuItem value="coding">Coding</MenuItem>
           <MenuItem value="football">Football</MenuItem>
           <MenuItem value="cooking">Cooking</MenuItem>
         </TextField>
       </Stack>
 
-      <Stack width={400}>
+      <Stack width={300}>
         <TextField
           size="small"
           label="Avatar URL"

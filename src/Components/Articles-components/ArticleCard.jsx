@@ -37,7 +37,19 @@ const ArticleCard = ({ article }) => {
     <Stack onClick={handleClick} className="article-card">
       <Card>
         <CardContent>
-          <Typography id="article-text" variant="h6">
+          <Typography
+            align="left"
+            className="article-title"
+            variant="h6"
+            sx={{
+              height: "70px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: "2",
+            }}
+          >
             {title}
           </Typography>
           <Grid container>
@@ -46,7 +58,7 @@ const ArticleCard = ({ article }) => {
                 By: @{author}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography align="right" variant="subtitle1" id="article-text">
                 {dateFormatted}
               </Typography>

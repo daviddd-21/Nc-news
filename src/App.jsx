@@ -10,7 +10,6 @@ import PostAnArticle from "./Components/PostAnArticle";
 function App() {
   return (
     <>
-      {/* <Header /> */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -25,6 +24,4 @@ function App() {
 
 export default App;
 
-//use text add an article/comment
-//use contained for register/login
 // use outlined for pagination thing
