@@ -1,4 +1,3 @@
-// import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Articles from "./Components/Articles";
 import Navbar from "./Components/Navbar";
@@ -24,4 +23,4 @@ function App() {
 
 export default App;
 
-// use outlined for pagination thing
+//use outlined for pagination thing
